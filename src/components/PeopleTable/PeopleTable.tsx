@@ -1,8 +1,7 @@
-import cN from 'classnames';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
 
 import { Loader } from '../Loader';
+import { PeopleTableRow } from '../PeopleTableRow';
 
 interface TabsProps {
   people: Person[];
@@ -10,15 +9,11 @@ interface TabsProps {
   hasError: boolean;
 }
 
-import { useParams } from 'react-router-dom';
-
 export const PeopleTable: React.FC<TabsProps> = ({
   people,
   isLoading,
   hasError,
 }) => {
-  const { selectedUserSlug } = useParams();
-
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -53,52 +48,9 @@ export const PeopleTable: React.FC<TabsProps> = ({
               </thead>
 
               <tbody>
-                {people.map(person => {
-                  const {
-                    sex,
-                    born,
-                    died,
-                    mother,
-                    father,
-                    slug,
-                    motherName,
-                    fatherName,
-                  } = person;
-
-                  return (
-                    <tr
-                      key={slug}
-                      data-cy="person"
-                      className={cN({
-                        'has-background-warning': slug === selectedUserSlug,
-                      })}
-                    >
-                      <td>
-                        <PersonLink person={person} />
-                      </td>
-
-                      <td>{sex}</td>
-                      <td>{born}</td>
-                      <td>{died}</td>
-
-                      <td>
-                        {mother ? (
-                          <PersonLink person={mother} />
-                        ) : (
-                          motherName || '-'
-                        )}
-                      </td>
-
-                      <td>
-                        {father ? (
-                          <PersonLink person={father} />
-                        ) : (
-                          fatherName || '-'
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {people.map(person => (
+                  <PeopleTableRow key={person.slug} person={person} />
+                ))}
               </tbody>
             </table>
           )}

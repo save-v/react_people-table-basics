@@ -1,9 +1,8 @@
 // import { Loader } from './components/Loader';
 
 import './App.scss';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import cN from 'classnames';
-import { useLocation } from 'react-router-dom';
 import { PeopleTable } from './components/PeopleTable';
 import { useEffect, useState } from 'react';
 import { Person } from './types';
